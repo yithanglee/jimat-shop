@@ -1,0 +1,143 @@
+@import './shared/var.scss';
+.bottom-action-bar {
+  button {
+    box-shadow: none !important;
+    text-align: center;
+    svg {
+      margin: 0 auto;
+    }
+  }
+}
+
+@mixin blockButton($color) {
+  border: 0;
+  background: $color;
+  color: $white;
+}
+@mixin lineButton($color) {
+  background: transparent;
+  color: $color;
+  border-color: $color;
+  transition: all 0.5s;
+  &:hover {
+    background: $color;
+    color: $white;
+  }
+}
+
+button {
+  text-align: center;
+  border-radius: 6px;
+  text-transform: capitalize;
+  width: 100%;
+  &.large {
+    min-width: 220px;
+    padding: 13px;
+    font-size: 17px;
+  }
+  &.small {
+    min-width: 180px;
+    padding: 11px;
+    font-size: 13px;
+  }
+
+  &.primary {
+    @include blockButton($blue);
+  }
+  &.success {
+    @include blockButton($green);
+  }
+  &.danger {
+    @include blockButton($pink);
+  }
+  &.warning {
+    @include blockButton($yellow);
+  }
+  &.info {
+    @include blockButton($light-blue);
+  }
+  &.light {
+    background: $white;
+    color: $black;
+  }
+  &.dark {
+    background: $black;
+    color: $white;
+  }
+  &.border {
+    border-style: solid;
+    border-width: 2px;
+    &.primary {
+      @include lineButton($blue);
+    }
+    &.success {
+      @include lineButton($green);
+    }
+    &.danger {
+      @include lineButton($pink);
+    }
+    &.warning {
+      @include lineButton($yellow);
+    }
+    &.info {
+      @include lineButton($light-blue);
+    }
+    &.light {
+      @include lineButton($black);
+    }
+  }
+  &:disabled {
+    background-color: #e5eaec !important;
+    color: #d0c9d6 !important;
+    &:hover {
+      animation-name: shake;
+      animation-iteration-count: 2;
+      animation-duration: 0.2s;
+    }
+  }
+}
+
+svg.loader {
+  animation: rotation 1s infinite linear;
+  vertical-align: middle;
+}
+
+/* Standard syntax */
+@keyframes shake {
+  0% {
+    transform: rotate(3deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes shake {
+  0% {
+    transform: rotate(3deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

@@ -1,0 +1,33 @@
+.state {
+  padding: 15px 10px;
+}
+
+.location {
+  .list-item {
+    margin-bottom: 0;
+    p {
+      font-weight: bold;
+    }
+  }
+  .Collapsible__trigger {
+    padding: 15px 10px;
+    display: block;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #ecebed;
+    &:after {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      content: '\2303';
+      font-weight: 800;
+      transition: all 0.4s;
+    }
+    &.active {
+      &:after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

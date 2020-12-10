@@ -1,0 +1,136 @@
+@import './shared/var.scss';
+@mixin background($color) {
+  background-color: $color;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  .list-body {
+    padding-left: 10px;
+    .title {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.29;
+      color: #1a051d;
+    }
+    .description {
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.18;
+      color: #99aab3;
+    }
+  }
+}
+
+.order-listing {
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.order {
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.5s;
+  background-color: white;
+  overflow: hidden;
+  .status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    border-radius: 1px;
+    &.primary {
+      @include background($blue);
+    }
+    &.success {
+      @include background($green);
+    }
+    &.danger {
+      @include background($pink);
+    }
+    &.warning {
+      @include background($yellow);
+    }
+    &.info {
+      @include background($light-blue);
+    }
+    &.grey {
+      @include background($grey);
+    }
+  }
+
+  a {
+    display: inline-block;
+    padding: 12px;
+    width: 100%;
+    span.label {
+      margin: 0;
+    }
+  }
+
+  .shop {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    .shop-item {
+      margin-top: 10px;
+      background-color: #f7f8fa;
+      padding: 10px;
+      border-radius: 3px;
+      .item {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .payment {
+    text-align: right;
+  }
+}
+
+.payment-success {
+  padding: 30px 10px;
+  background: $green;
+  color: white;
+  text-align: center;
+  svg {
+    width: 50px;
+    fill: white;
+    margin-bottom: 10px;
+  }
+}
+
+.invoice {
+  padding: 10px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  background-color: $light-grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    font-size: 14px;
+    color: $dark-grey;
+  }
+  a,
+  p {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $yellow;
+    font-weight: 600;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+#hero {
+  padding: 0;
+  .content {
+    padding-top: 100px;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+    .wrapper {
+      position: absolute;
+      top: 45%;
+      left: 5%;
+      width: 350px;
+    }
+  }
+}
+
+#purpose {
+  padding: 10% 0;
+  @media screen and (max-width: 480px) {
+    padding: 20% 0;
+  }
+
+  .content {
+    width: 80%;
+    margin: 0 auto 30px;
+    @media screen and (max-width: 480px) {
+      text-align: center;
+    }
+  }
+}
+
+#angkasa {
+  text-align: center;
+  img {
+    width: 120px;
+    margin-bottom: 20px;
+  }
+  .content {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+#join-community {
+  padding: 10% 0 0;
+  @media screen and (max-width: 480px) {
+    padding: 20% 0;
+  }
+  text-align: center;
+  img {
+    width: 360px;
+  }
+}

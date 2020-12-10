@@ -1,0 +1,46 @@
+@import './shared/var.scss';
+.banner-slider {
+  width: 100% !important;
+}
+
+.banner-wrapper {
+  padding: 10px 5px 20px;
+}
+
+.banner-dots {
+  position: initial;
+  li {
+    background: rgba(#99aab3, 0.3);
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    &.slick-active {
+      background: #1d3861;
+    }
+    button {
+      display: none;
+    }
+  }
+}
+
+.banner {
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+
+  &.promotion-banner {
+    box-shadow: none !important;
+    padding-bottom: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .banner-img {
+    width: 70px;
+    margin-right: 15px;
+  }
+  .banner-content {
+    width: calc(100% - 70px - 10%);
+  }
+}

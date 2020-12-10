@@ -1,0 +1,17 @@
+@import './shared/var.scss';
+
+.sign-in-wrapper {
+  text-align: center;
+  .modal-text {
+    margin: 10px 0;
+  }
+}
+
+.cart-summary-link {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0;
+  a {
+    color: $light-blue;
+  }
+}

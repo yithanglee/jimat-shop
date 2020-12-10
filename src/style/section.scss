@@ -1,0 +1,40 @@
+section {
+  width: 100%;
+  padding: 12px;
+  .section-header {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.33;
+    color: #1a051d;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    a {
+      text-decoration: none;
+      color: #0084f4;
+      font-size: 13px;
+    }
+  }
+  &.vertical {
+    padding: 12px 0px;
+    .section-header {
+      padding: 0px 12px;
+    }
+  }
+  &.horizontal {
+    padding: 0px 12px;
+  }
+  &.noBottom {
+    padding: 12px;
+    padding-bottom: 0px;
+  }
+  &.none {
+    padding: 0;
+  }
+  &.divider {
+    box-shadow: 0 1px 1px 0 rgba(208, 201, 214, 0.5);
+  }
+  &.no-content {
+    padding: 0 !important;
+  }
+}

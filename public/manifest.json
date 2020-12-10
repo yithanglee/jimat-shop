@@ -1,0 +1,26 @@
+{
+  "short_name": "JiMATSHOP",
+  "name": "JiMATSHOP",
+  "icons": [
+    {
+      "src": ".m/icon/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./icon/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./icon/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1d3861",
+  "prefer_related_applications": false,
+  "background_color": "#1d3861"
+}

@@ -1,0 +1,34 @@
+@import './shared/var.scss';
+
+.list-item {
+  border: 1px solid #ecebed;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 3px;
+  justify-content: space-between;
+  width: 100%;
+  &.divider {
+    border-width: 1px 0 1px 0 !important;
+  }
+  .list-content {
+    svg,
+    .content {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+  &.full-width {
+    border-width: 1px 0 0 0;
+    border-radius: 0;
+    &:last-child {
+      border-width: 1px 0 1px 0;
+    }
+  }
+  .info {
+    display: flex;
+  }
+  svg {
+    margin-right: 12px;
+  }
+}

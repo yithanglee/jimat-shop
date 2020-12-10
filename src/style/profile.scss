@@ -1,0 +1,64 @@
+.user-profile {
+  border-radius: 4px;
+  box-shadow: 0 7px 64px 0 rgba(0, 0, 0, 0.07);
+  background-color: #ffffff;
+  padding: 12px;
+  p {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.33;
+    color: #1a051d;
+    margin-bottom: 8px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: flex;
+      align-items: center;
+      padding: 3px 0;
+      justify-content: space-between;
+      span {
+        font-size: 13px;
+        line-height: 1.38;
+        color: #1a051d;
+      }
+      span:first-child {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+.list {
+  box-shadow: inset 0 -1px 0 0 rgba(208, 201, 214, 0.4);
+  padding: 12px;
+  .list-body {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.33;
+    color: #1a051d;
+  }
+}
+
+.log-out-link {
+  display: block;
+  text-align: center;
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+
+.edit-profile-form {
+  button[type='submit'] {
+    text-align: center;
+    padding: 13px;
+    font-size: 17px;
+    border-radius: 6px;
+    text-transform: capitalize;
+    width: 100%;
+    border: 0;
+    background: #1d3861;
+    color: white;
+  }
+}

@@ -1,0 +1,15 @@
+@import './shared/var.scss';
+
+footer {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #f4f6f7;
+  .social {
+    margin-bottom: 10px;
+    a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px;
+    }
+  }
+}

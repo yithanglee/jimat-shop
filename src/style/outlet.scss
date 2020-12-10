@@ -1,0 +1,112 @@
+@import './shared/var.scss';
+
+.outlet-list {
+  // display: flex;
+  // flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: 1fr;
+  &.is-desktop {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr;
+    // .outlet {
+    //   flex: 0 0 33%;
+    // }
+  }
+  .outlet {
+    // flex: 0 0 100%;
+    background: white;
+    height: 100%;
+    border-radius: 5px;
+    &.coming-soon {
+      background: $light-grey;
+      a:hover {
+        cursor: not-allowed;
+      }
+    }
+    // box-shadow: inset 0 -1px 0 0 rgba(208, 201, 214, 0.4);
+    a {
+      display: block;
+    }
+
+    // &:first-child {
+    //   padding-top: 0px;
+    // }
+    .outlet-name {
+      font-size: 15px;
+      line-height: 1.33;
+    }
+    .outlet-category {
+      color: #99aab3;
+      font-size: 13px;
+      line-height: 1.38;
+    }
+    .outlet-location {
+      font-size: 11px;
+      line-height: 1.18;
+    }
+  }
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (max-width: 480px) {
+    flex-wrap: wrap;
+  }
+  & > * {
+    flex: 1 1 auto;
+    text-align: center;
+    margin: 5px;
+  }
+}
+
+.outlet-item-row {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .col {
+    width: calc(50% - 8px);
+    flex: 0 0 calc(50% - 8px);
+    padding-bottom: 12px;
+    @media screen and (min-width: 700px) {
+      width: calc(33% - 8px);
+      flex: 0 0 calc(33% - 8px);
+    }
+    @media screen and (min-width: 900px) {
+      width: calc(25% - 8px);
+      flex: 0 0 calc(25% - 8px);
+    }
+  }
+}
+
+.favourite-outlet {
+  margin-top: 10px;
+  padding: 8px 10px;
+  display: inline-block;
+  border-radius: 5px;
+  color: $grey;
+  border: 1px solid $grey;
+  &:hover {
+    cursor: pointer;
+  }
+}

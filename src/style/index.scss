@@ -1,0 +1,151 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800;900&display=swap');
+
+html, body {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, 'Roboto', 'Segoe UI', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f6f9ff;
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: none;
+  }
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+*,
+div {
+  &:focus {
+    outline: 0 !important;
+  }
+}
+
+*:not(input) {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.body-wrapper {
+  display: flex;
+  width: 100vw;
+  flex-direction: row;
+  justify-content: space-evenly;
+  overflow: hidden;
+
+  &.is-desktop {
+    height: 100vh;
+    padding-right: 320px;
+    &.withSidebar {
+      padding-right: 0;
+    }
+  }
+
+  .body {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &::-webkit-scrollbar {
+      width: 0px;
+      display: none;
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: none;
+    }
+  }
+}
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+div.transition-group {
+  position: relative;
+}
+
+a {
+  color: #1d3861;
+  text-decoration: none;
+}
+
+.text-right {
+  text-align: right;
+}
+
+button._6a7e {
+  width: auto !important;
+}
+
+.text-jimat-blue {
+  color: #1e3761;
+}
+
+.bg-jimat-blue {
+  background-color: #1e3761;
+}

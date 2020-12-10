@@ -1,0 +1,9 @@
+env:
+  REACT_APP_JIMAT_API_ROOT: https://jimatbiz.com
+  REACT_APP_GOOGLE_CLIENT_ID: 890444227956-lkb5u00epghagulo8o0pjl2ffv6okplk.apps.googleusercontent.com
+  NODE_ENV: production
+
+configValues: |
+  window.REACT_APP_JIMAT_API_ROOT='https://jimatbiz.com'
+  window.REACT_APP_GOOGLE_CLIENT_ID='890444227956-lkb5u00epghagulo8o0pjl2ffv6okplk.apps.googleusercontent.com'
+  window.NODE_ENV='production'

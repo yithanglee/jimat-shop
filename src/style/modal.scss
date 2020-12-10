@@ -1,0 +1,30 @@
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(black, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  .modal-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modal {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px;
+      background: white;
+      color: black;
+      bottom: 0px;
+      border-radius: 10px;
+      img {
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+}

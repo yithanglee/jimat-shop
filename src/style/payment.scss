@@ -1,0 +1,112 @@
+@import 'style/shared/var.scss';
+
+.banks {
+  border-radius: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 12px;
+  .bank {
+    padding: 10px;
+    flex: 0 1 calc(33% - 5px);
+    margin-bottom: 10px;
+    display: flex;
+    border-radius: 3px;
+    background: #f6f9fc;
+    border: 1px solid #f6f9fc;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.3s;
+    align-items: center;
+
+    img {
+      height: 30px;
+      width: 30px;
+      vertical-align: middle;
+      flex: 0 0 30px;
+    }
+    .bank-name {
+      vertical-align: middle;
+      display: inline-block;
+      padding-left: 10px;
+    }
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $green;
+      color: $green;
+    }
+    &.selected {
+      border: 1px solid $green;
+      color: $white;
+      background-color: $green;
+      &:hover {
+        color: $white;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      flex: 0 1 calc(50% - 5px);
+    }
+  }
+}
+
+.list-item {
+  // border: 1px solid #ecebed;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 3px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+
+  .list-content {
+    &.full-width {
+      width: 100%;
+      flex: 0 0 100%;
+    }
+  }
+}
+
+// .selector {
+//   width: 24px;
+//   height: 24px;
+//   border: 1px solid $grey;
+//   border-radius: 100%;
+//   padding: 4px;
+//   position: relative;
+//   &.selected {
+//     border: 1px solid $blue;
+//   }
+
+//   &.selected:after {
+//     content: ' ';
+//     position: absolute;
+//     background-color: $blue;
+//     border-radius: 100%;
+//     height: 18px;
+//     width: 18px;
+//     z-index: 100;
+//     top: 2px;
+//     left: 2px;
+//   }
+// }
+// .bank-selector {
+//   position: relative;
+//   select {
+//     width: 100%;
+//     background: white;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     appearance: none; /* Remove default arrow */
+//     padding: 12px;
+//     border-radius: 3px;
+//     font-size: 16px;
+//     border: 1px solid #ecebed;
+//   }
+//   .arrow {
+//     position: absolute;
+//     top: 10px;
+//     right: 5px;
+//   }
+// }

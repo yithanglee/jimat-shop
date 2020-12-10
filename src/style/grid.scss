@@ -1,0 +1,16 @@
+.grid-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .grid-col {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    @media screen and (max-width: 480px) {
+      width: 100% !important;
+      flex-basis: 100% !important;
+    }
+  }
+}

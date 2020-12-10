@@ -1,0 +1,21 @@
+.slider {
+  display: flex;
+  min-width: 100%;
+  overflow-x: scroll;
+  padding: 0 12px !important;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: none;
+  }
+}
+
+.slider-item {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 12px;
+}

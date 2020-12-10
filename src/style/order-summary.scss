@@ -1,0 +1,29 @@
+.order-summary {
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: 0 7px 64px 0 rgba(0, 0, 0, 0.07);
+
+  p {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.33;
+    color: #1a051d;
+    margin-bottom: 8px;
+  }
+
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    span {
+      font-size: 13px;
+      line-height: 1.38;
+      color: #1a051d;
+    }
+    &:last-child {
+      span {
+        font-size: 15px;
+      }
+    }
+  }
+}

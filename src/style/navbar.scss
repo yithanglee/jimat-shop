@@ -1,0 +1,126 @@
+@import './shared/var.scss';
+.navbar {
+  padding: 12px;
+  transition: all 0.5s;
+  background: $blue;
+  .logo {
+    width: 50px;
+    height: 50px;
+    img {
+      width: 100%;
+    }
+  }
+  .navbar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  &.is-mobile {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.07);
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    .navbar-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+  &.is-desktop {
+    height: 100%;
+    width: auto;
+    border-radius: 0;
+    padding: 12px;
+    .navbar-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 50px);
+    }
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    transition: transform 0.4s;
+    svg {
+      stroke: white;
+    }
+    &.active {
+      color: #fbbc04;
+      pointer-events: none;
+      transform: scale(1.1);
+      svg {
+        stroke: #fbbc04;
+      }
+    }
+    .nav-item {
+      text-align: center;
+      svg {
+        text-align: center;
+      }
+      span {
+        text-transform: uppercase;
+        font-size: 10px;
+        display: block;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.navbar2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 10%;
+  @media screen and (max-width: 480px) {
+    padding: 15px 5%;
+  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  flex-wrap: wrap;
+  .logo {
+    flex: 0 0 170px;
+    border-radius: 30px;
+    overflow: hidden;
+    text-align: center;
+    background: white;
+    img {
+      width: 150px;
+    }
+  }
+  ul {
+    padding: 0;
+
+    li {
+      display: inline-block;
+      padding-left: 20px;
+      text-align: center;
+    }
+  }
+  a {
+    transition: all 1s;
+    &:hover {
+      p {
+        color: $yellow;
+      }
+    }
+  }
+  .account {
+    padding: 10px 30px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: saturate(180%), blur(20px);
+    transition: all 0.5s;
+    &:hover {
+      cursor: pointer;
+      background: white;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

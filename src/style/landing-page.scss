@@ -1,0 +1,14 @@
+.landing-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wrapper {
+    text-align: center;
+    .logo {
+      width: 300px;
+      margin-bottom: 30px;
+    }
+  }
+}
