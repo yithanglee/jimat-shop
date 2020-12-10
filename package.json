@@ -1,6 +1,6 @@
 {
-  "name": "jimat-pwa",
-  "version": "0.2.2",
+  "name": "jimat-shop",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
