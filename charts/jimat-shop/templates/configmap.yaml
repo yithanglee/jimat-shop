@@ -7,8 +7,7 @@ metadata:
     "helm.sh/hook-delete-policy": "before-hook-creation"
     "helm.sh/hook": pre-install, pre-upgrade
 data:
-  {{- if eq "jx-staging" .Release.Namespace }}
-  config.js: {{ toYaml .Values.config.staging | indent 4 }}
-  {{- else }}
-  config.js: {{ toYaml .Values.config.production | indent 4 }}
-  {{- end }}
+  config.js: |
+    window.REACT_APP_JIMAT_API_ROOT={{ .Values.config.staging.REACT_APP_JIMAT_API_ROOT }}
+    window.REACT_APP_GOOGLE_CLIENT_ID={{ .Values.config.staging.GOOGLE_CLIENT_ID }}
+    window.NODE_ENV={{ .Release.Namespace | replace "jx-" "" }}
