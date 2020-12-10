@@ -7,4 +7,8 @@ metadata:
     "helm.sh/hook-delete-policy": "before-hook-creation"
     "helm.sh/hook": pre-install, pre-upgrade
 data:
-  config.js: {{ toYaml .Values.configValues | indent 4 }}
+  {{- if eq "jx-staging" .Release.Namespace }}
+  config.js: {{ toYaml .Values.config.staging | indent 4 }}
+  {{- else }}
+  config.js: {{ toYaml .Values.config.production | indent 4 }}
+  {{- end }}
