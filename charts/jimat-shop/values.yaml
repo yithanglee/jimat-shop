@@ -112,8 +112,8 @@ jxRequirements:
 
 config:
   staging:
-    REACT_APP_JIMAT_API_ROOT: vault:secret/data/jimat/staging/jimat/shop:JIMAT_API_URL
-    REACT_APP_GOOGLE_CLIENT_ID: vault:secret/data/jimat/staging/jimat/shop:GOOGLE_CLIENT_ID
+    REACT_APP_JIMAT_API_ROOT: vault:jimat/staging/jimat/shop:JIMAT_API_URL
+    REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/staging/jimat/shop:GOOGLE_CLIENT_ID
   production:
-    REACT_APP_JIMAT_API_ROOT: vault:secret/data/jimat/production/jimat/shop:JIMAT_API_URL
-    REACT_APP_GOOGLE_CLIENT_ID: vault:secret/data/jimat/production/jimat/shop:GOOGLE_CLIENT_ID
+    REACT_APP_JIMAT_API_ROOT: vault:jimat/production/jimat/shop:JIMAT_API_URL
+    REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/production/jimat/shop:GOOGLE_CLIENT_ID
