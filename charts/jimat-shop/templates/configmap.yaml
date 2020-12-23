@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ .Chart.Name }}
   annotations:
     # https://github.com/helm/helm/blob/master/docs/charts_hooks.md
     "helm.sh/hook-delete-policy": "before-hook-creation"

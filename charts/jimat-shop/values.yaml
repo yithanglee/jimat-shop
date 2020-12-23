@@ -17,6 +17,10 @@ jx:
 # define environment variables here as a map of key: value
 env:
 
+envFrom:
+  - secretRef:
+      name: jimat-shop
+
 # secrets
 secrets:
   staging:
