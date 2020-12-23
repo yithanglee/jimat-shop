@@ -8,6 +8,7 @@ metadata:
     "helm.sh/hook": pre-install, pre-upgrade
 data:
   config.js: |
-    window.REACT_APP_JIMAT_API_ROOT={{ .Values.secrets.staging.REACT_APP_JIMAT_API_ROOT }}
-    window.REACT_APP_GOOGLE_CLIENT_ID={{ .Values.secrets.staging.REACT_APP_GOOGLE_CLIENT_ID }}
-    window.NODE_ENV={{ .Release.Namespace | replace "jx-" "" }}
+    window.REACT_APP_JIMAT_API_ROOT='$JIMAT_API_URL'
+    window.REACT_APP_GOOGLE_CLIENT_ID='$GOOGLE_CLIENT_ID'
+    window.NODE_ENV='{{ .Release.Namespace | replace "jx-" "" }}'
+

@@ -111,7 +111,6 @@ jxRequirements:
       email: "support@mail.jimathub.com"
       enabled: true
       production: false
-      secretName: "tls-jimathub-com-p"
 
     # For Kubernetes v1.14+, use 'networking.k8s.io/v1beta1'
     apiVersion: "networking.k8s.io/v1beta1"
@@ -119,11 +118,3 @@ jxRequirements:
     # shared ingress annotations on all services
     annotations:
     #  kubernetes.io/ingress.class: nginx
-
-config:
-  staging:
-    REACT_APP_JIMAT_API_ROOT: vault:jimat/staging/jimat/shop:JIMAT_API_URL
-    REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/staging/jimat/shop:GOOGLE_CLIENT_ID
-  production:
-    REACT_APP_JIMAT_API_ROOT: vault:jimat/production/jimat/shop:JIMAT_API_URL
-    REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/production/jimat/shop:GOOGLE_CLIENT_ID
