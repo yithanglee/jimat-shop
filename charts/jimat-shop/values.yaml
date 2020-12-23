@@ -1,7 +1,8 @@
 # Default values for your projects.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-nameOverride: "app"
+
+# nameOverride: "app"
 
 replicaCount: 1
 image:
@@ -19,8 +20,8 @@ env:
 # secrets
 secrets:
   staging:
-      REACT_APP_JIMAT_API_ROOT: vault:jimat/staging/jimat/shop:JIMAT_API_URL
-      REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/staging/jimat/shop:GOOGLE_CLIENT_ID
+    REACT_APP_JIMAT_API_ROOT: vault:jimat/staging/jimat/shop:JIMAT_API_URL
+    REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/staging/jimat/shop:GOOGLE_CLIENT_ID
   production:
     REACT_APP_JIMAT_API_ROOT: vault:jimat/production/jimat/shop:JIMAT_API_URL
     REACT_APP_GOOGLE_CLIENT_ID: vault:jimat/production/jimat/shop:GOOGLE_CLIENT_ID
