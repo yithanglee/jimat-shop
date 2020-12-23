@@ -77,6 +77,6 @@ spec:
 {{- end }}
       volumes:
       - name: {{ template "fullname" . }}
-        configMap:
-          name: {{ .Chart.Name }}
+        secret:
+          secretName: {{ .Chart.Name }}
 

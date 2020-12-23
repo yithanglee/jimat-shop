@@ -26,17 +26,21 @@ spec:
 {{- else if .Values.jxRequirements.ingress.domain }}
     host: {{ .Values.service.name }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
 {{- end }}
+{{- if eq "jx-production" .Release.Namespace }}
   - http:
       paths:
       - backend:
           serviceName: {{ .Values.service.name }}
           servicePort: 80
     host: shop.jimatbiz.com
+{{- end }}
 {{- if .Values.jxRequirements.ingress.tls.enabled }}
   tls:
+{{- if eq "jx-production" .Release.Namespace }}
   - hosts: 
     - shop.jimatbiz.com
     secretName: tls-jimatbiz-com-p
+{{- end }}
   - hosts:
     - {{ .Values.service.name }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
 {{- if and (hasKey .Values.jxRequirements.ingress.tls "secretName") (.Values.jxRequirements.ingress.tls.secretName) }}
