@@ -43,6 +43,7 @@ import Home from 'pages/home';
 import Cart from 'pages/cart';
 import TnC from 'pages/TnC';
 import HotItems from 'pages/hotItems';
+import AuthorizationWithToken from 'pages/auth';
 
 function App() {
   const handleMediaQueryChange = matches => {
@@ -195,6 +196,7 @@ function App() {
                         />
                         <Route exact path={'/wishlist'} component={Wishlist} />
                         <Route exact path={'/hot-items'} component={HotItems} />
+                        <Route exact path={'/auth/:token'} component={AuthorizationWithToken} />
                       </Switch>
                     </div>
                   </CSSTransition>

@@ -9,7 +9,7 @@ const cartsQuantity = createSelector(
   carts => carts.allIds.map(id => carts.byId[id].quantity)
 );
 
-const CartSummary = ({ ready_to_pay, handleCreditToggle }) => {
+const CartSummary = ({ ready_to_pay, membership_verified, handleCreditToggle }) => {
   const dispatch = useDispatch();
   const [is_credit_used, toggle_credit] = useState(false);
   const carts = useSelector(cartsQuantity, shallowEqual);
@@ -36,16 +36,22 @@ const CartSummary = ({ ready_to_pay, handleCreditToggle }) => {
         <div className="justify-between items-center flex p-2 border border-dashed rounded mb-2">
           <label
             htmlFor="pay_with_credit"
-            className="block text-sm font-bold leading-tight text-gray-900"
+            className="block leading-tight text-gray-900"
           >
-            Pay with JiMAT Voucher
-            <p className="block text-sm font-bold text-blue-600 py-2">
+            {!membership_verified
+              ?  <span className="text-sm font-bold text-red-600">Verify now to use voucher</span>
+              : <span className="text-sm font-bold">Pay with JiMAT Voucher</span>
+            }
+            
+            <p className="block text-sm font-bold text-blue-600 pt-2 pb-1">
               {credit_enabled_outlet[outletId]} Available
             </p>
+            {!membership_verified && <span className="text-xs text-gray-500 text-normal">Please check your email for verification</span>}
           </label>
           <input
             id="pay_with_credit"
             type="checkbox"
+            disabled={!membership_verified}
             onChange={handleCheckbox}
             className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
           />

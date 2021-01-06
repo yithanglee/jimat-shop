@@ -44,6 +44,12 @@ const Payment = props => {
       );
     });
 
+  const isMembershipVerified =
+    user &&
+    user.memberships.filter(membership => {
+      return membership.outlet_id.toString() === outletId && membership.verified
+    });
+
   useEffect(() => {
     if (!banks.length) {
       api.GET('billing/payment_methods/banks').then(response => {
@@ -123,6 +129,7 @@ const Payment = props => {
         <CartSummary
           handleCreditToggle={toggleCredit}
           ready_to_pay={isMembershipAvailable.length > 0}
+          membership_verified={isMembershipVerified.length > 0}
         />
       </Section>
       {cartSummary && cartSummary.net_price_cents > 0 && (

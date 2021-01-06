@@ -99,6 +99,26 @@ export const login = body => {
   };
 };
 
+export const login_with_token = params => {
+  return async dispatch => {
+    try {
+      const resp = await api.POST('/authentication/tokenized', params);
+      Cookies.set('accessToken', resp.data.data.token);
+      Cookies.remove('isSkipped');
+      dispatch(
+        catchNotification({
+          header: 'Login Successfully',
+          message: 'Happy Day. Welcome Back.',
+        })
+      );
+      dispatch(loginSuccess(resp.data.data));
+    } catch (err) {
+      dispatch(loginFailure(err));
+      throw err;
+    }
+  };
+};
+
 export const logout = () => async dispatch => {
   try {
     const resp = await api.DELETE('/authentication');
