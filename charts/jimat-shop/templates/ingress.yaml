@@ -32,14 +32,14 @@ spec:
       - backend:
           serviceName: {{ .Values.service.name }}
           servicePort: 80
-    host: www{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+    host: www2.jimatshop.com
 {{- end }}
 {{- if .Values.jxRequirements.ingress.tls.enabled }}
   tls:
   - hosts:
     - {{ .Values.service.name | replace "jimat-" ""  }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
 {{- if eq "jx-production" .Release.Namespace }}
-    - www{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+    - www2.jimatshop.com
 {{- end }}
 {{- if and (hasKey .Values.jxRequirements.ingress.tls "secretName") (.Values.jxRequirements.ingress.tls.secretName) }}
     secretName: "{{ .Values.jxRequirements.ingress.tls.secretName }}"
