@@ -36,11 +36,13 @@ spec:
 {{- end }}
 {{- if .Values.jxRequirements.ingress.tls.enabled }}
   tls:
+{{- if eq "jx-production" .Release.Namespace }}
+  - hosts:
+    - www2.jimatshop.com
+    secretName: "tls-jimatshop-com-p"
+{{- end }}
   - hosts:
     - {{ .Values.service.name | replace "jimat-" ""  }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
-{{- if eq "jx-production" .Release.Namespace }}
-    - www2.jimatshop.com
-{{- end }}
 {{- if and (hasKey .Values.jxRequirements.ingress.tls "secretName") (.Values.jxRequirements.ingress.tls.secretName) }}
     secretName: "{{ .Values.jxRequirements.ingress.tls.secretName }}"
 {{- else if .Values.jxRequirements.ingress.tls.production }}
