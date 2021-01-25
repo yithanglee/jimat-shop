@@ -16,6 +16,20 @@ metadata:
   name: {{ .Values.service.name }}
 spec:
   rules:
+{{- if eq "jx-production" .Release.Namespace }}
+  - http:
+      paths:
+      - backend:
+          serviceName: {{ .Values.service.name }}
+          servicePort: 80
+    host: www.jimatshop.com
+  - http:
+      paths:
+      - backend:
+          serviceName: {{ .Values.service.name }}
+          servicePort: 80
+    host: www2.jimatshop.com
+{{- else}}
   - http:
       paths:
       - backend:
@@ -26,21 +40,15 @@ spec:
 {{- else if .Values.jxRequirements.ingress.domain }}
     host: {{ .Values.service.name | replace "jimat-" "" }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
 {{- end }}
-{{- if eq "jx-production" .Release.Namespace }}
-  - http:
-      paths:
-      - backend:
-          serviceName: {{ .Values.service.name }}
-          servicePort: 80
-    host: www2.jimatshop.com
 {{- end }}
 {{- if .Values.jxRequirements.ingress.tls.enabled }}
   tls:
 {{- if eq "jx-production" .Release.Namespace }}
   - hosts:
+    - www.jimatshop.com
     - www2.jimatshop.com
     secretName: "tls-jimatshop-com-p"
-{{- end }}
+{{- else }}
   - hosts:
     - {{ .Values.service.name | replace "jimat-" ""  }}{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
 {{- if and (hasKey .Values.jxRequirements.ingress.tls "secretName") (.Values.jxRequirements.ingress.tls.secretName) }}
@@ -49,6 +57,7 @@ spec:
     secretName: "tls-{{ .Values.jxRequirements.ingress.domain | replace "." "-" }}-p"
 {{- else }}
     secretName: "tls-{{ .Values.jxRequirements.ingress.domain | replace "." "-" }}-s"
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
