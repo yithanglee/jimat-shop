@@ -28,7 +28,7 @@ spec:
       - backend:
           serviceName: {{ .Values.service.name }}
           servicePort: 80
-    host: www2.jimatshop.com
+    host: jimatshop.com
 {{- else}}
   - http:
       paths:
@@ -46,7 +46,7 @@ spec:
 {{- if eq "jx-production" .Release.Namespace }}
   - hosts:
     - www.jimatshop.com
-    - www2.jimatshop.com
+    - jimatshop.com
     secretName: "tls-jimatshop-com-p"
 {{- else }}
   - hosts:
