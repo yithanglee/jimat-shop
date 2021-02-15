@@ -23,7 +23,7 @@ spec:
           serviceName: {{ .Values.service.name }}
           servicePort: 80
     host: jimatshop.com
-  - http:a
+  - http:
       paths:
       - backend:
           serviceName: {{ .Values.service.name }}
