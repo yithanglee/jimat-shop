@@ -8,12 +8,12 @@ const Layout = props => {
     props.content === undefined || (props.content && props.content.length > 0);
   return (
     <div className={clsx(
-      `layout h-full`,
+      `layout`,
       props.padding ? props.padding : '',
       props.background ? 'bg-'+props.background : '',
       props.klass ? props.klass : ''
     )}>
-      <div className="h-full">
+      <div className="min-h-screen">
         {isValid ? (
           props.children
         ) : (

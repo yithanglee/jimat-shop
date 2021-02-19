@@ -133,7 +133,7 @@ const Payment = props => {
         />
       </Section>
       {cartSummary && cartSummary.net_price_cents > 0 && (
-        <Section header="Payment Method" klass="min-h-screen">
+        <Section header="Payment Method" klass="pb-20">
           <div className="list-item bg-white">
             <div className="list-content full-width">
               <p className="text-sm leading-5 font-bold font-medium text-gray-800">
