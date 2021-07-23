@@ -2,9 +2,14 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# nameOverride: "app"
-
 replicaCount: 1
+# Add annotations to the pods
+podAnnotations: {}
+# Add labels to the pods
+podsLabels: {}
+# Add labels to the deployment
+deploymentLabels: {}
+
 image:
   repository: draft
   tag: dev
@@ -12,7 +17,11 @@ image:
 
 # optional list of image pull secrets to use to pull images
 jx:
+  # optional image pull secrets
   imagePullSecrets: []
+
+  # whether to create a Release CRD when installing charts with Release CRDs included
+  releaseCRD: true
 
 # define environment variables here as a map of key: value
 env:
@@ -93,8 +102,13 @@ readinessProbe:
 
 # custom ingress annotations on this service
 ingress:
-  annotations:
-    # kubernetes.io/ingress.class: nginx
+  annotations: {}
+  # defaults to nginx if no other ingress class annotation specified
+  classAnnotation: ""
+  # Add labels to the ingress
+  labels: {}
+  # ingress path type
+  pathType: ImplementationSpecific
 
 serviceAccount:
   enabled: true
@@ -120,5 +134,4 @@ jxRequirements:
     apiVersion: "networking.k8s.io/v1"
 
     # shared ingress annotations on all services
-    annotations:
-    #  kubernetes.io/ingress.class: nginx
+    annotations: {}
