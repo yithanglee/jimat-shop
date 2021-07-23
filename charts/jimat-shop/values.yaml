@@ -107,7 +107,7 @@ serviceAccount:
 # values we use from the `jx-requirements.yml` file if we are using helmfile and helm 3
 jxRequirements:
   ingress:
-    domain: "jimathub.com"
+    domain: "stg.jimathub.com"
     externalDNS: true
     namespaceSubDomain: .
     serviceType: ""
@@ -117,7 +117,7 @@ jxRequirements:
       production: false
 
     # For Kubernetes v1.14+, use 'networking.k8s.io/v1beta1'
-    apiVersion: "networking.k8s.io/v1beta1"
+    apiVersion: "networking.k8s.io/v1"
 
     # shared ingress annotations on all services
     annotations:
