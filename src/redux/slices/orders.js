@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { clearCart } from './carts';
 import Storage from 'utils/storage';
 import api from 'utils/api';
-
+import { catchError } from './error';
 const initialState = {
   loading: true,
   items: [],
@@ -97,6 +97,7 @@ export const payOrder = (
   useCredit
 ) => {
   return async dispatch => {
+ 
     try {
       dispatch(fetchingOrder());
       const request = await api.POST(`outlets/${outletId}/checkout`, {
@@ -104,17 +105,31 @@ export const payOrder = (
         ...paymentDetails,
         is_credit_used: useCredit,
       });
+
       const {redirect_uri, sales_order} = request.data;
       dispatch(clearCart());
       return (redirect_uri) ? redirect_uri : `order/${sales_order.id}`;
     } catch (e) {
-      console.error(e);
-    }
+      console.log(e);
+      dispatch(clearCart());
+       dispatch(
+        catchError({
+          header: 'Orders',
+          message: 'Something went wrong with order, please try again.',
+        })
+      );
+   
+       setTimeout(() => {
+         window.location = '/orders'
+       }, 3000);
+
+    };
   };
 };
 
 export const makePayment = (salesId, paymentDetails) => {
-  return async () => {
+  return async dispatch => {
+
     try {
       const resp = await api.POST(
         `sales_orders/${salesId}/payment`,
@@ -123,7 +138,19 @@ export const makePayment = (salesId, paymentDetails) => {
       return resp.data.redirect_uri;
     } catch (e) {
       console.error(e);
-    }
+       dispatch(
+        catchError({
+          header: 'Orders',
+          message: 'Something went wrong with order, please try again.',
+        })
+      );
+   
+       setTimeout(() => {
+         window.location = '/orders'
+       }, 3000);
+      
+
+    };
   };
 };
 
