@@ -36,6 +36,7 @@ const orders = createSlice({
     fetchOrdersFailure: (state, { payload }) => {
       return {
         ...state,
+        loading: false,
         error: payload,
       };
     },
@@ -47,7 +48,12 @@ const orders = createSlice({
         state.items.push(payload);
       }
     },
-    fetchOrderFailure: (state, { payload }) => {},
+    fetchOrderFailure: (state, { payload }) => {
+      return {
+        ...state,
+        loading: false
+      }
+    },
     setOrderStatus: (state, {payload}) => {
       const index = state.items.findIndex(each => each.id.toString() === payload.id);
       if (index !== -1) {
@@ -114,17 +120,14 @@ export const payOrder = (
       dispatch(clearCart());
       return (redirect_uri) ? redirect_uri : `order/${sales_order.id}`;
     } catch (e) {
-      dispatch(clearCart());
-       dispatch(
+      const { message } = e.response.data
+      dispatch(
         catchError({
           header: 'Orders',
-          message: 'Something went wrong with order, please try again.',
+          message: message,
         })
       );
-   
-       setTimeout(() => {
-         window.location = '/orders'
-       }, 3000);
+      dispatch(fetchOrderFailure({payload: e.response.data}));
     };
   };
 };
