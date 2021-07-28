@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -14,6 +14,10 @@ import ProductListing from 'components/ProductListing';
 import Listing from 'components/Listing';
 import api from 'utils/api';
 import 'style/order.scss';
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+}
 
 const InvoiceDownload = ({
   order,
@@ -169,6 +173,7 @@ const OrderDetail = withLoader(
 const Order = props => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const params = useQuery();
   const isOnline = useSelector(state => state.network.isOnline);
   const credit_enabled_outlet = useSelector(
     state => state.auth.user.credit_enabled_outlet
@@ -197,8 +202,6 @@ const Order = props => {
     api
       .PUT(`sales_orders/${orderId}`, { status: 'cancel' })
       .then(function() {
-        // props.history.push(`/orders`);
-        // should push a alert
         window.location.reload();
       })
       .catch(function(error) {
@@ -233,8 +236,13 @@ const Order = props => {
   }
 
   useEffect(() => {
+    if (params.get('billplz[paid]')) {
+      return window.location.href = `/order/${id}`
+    }
+
     if (isOnline && order) {
       const {status, payment_type} = order
+
       if (order && !payment_type) {
         switch (status) {
           case 'Paid':
@@ -247,7 +255,7 @@ const Order = props => {
       }
       updateInvoiceStatus(true);
     }
-  }, [dispatch, id, isOnline, order]);
+  }, [dispatch, id, isOnline, order, params]);
 
   useEffect(() => {
     checkPaymentMethods(order)
@@ -263,13 +271,6 @@ const Order = props => {
   useEffect(() => {
     checkPaymentMethods(order)
   }, [order])
-
-  useEffect(() => {
-    if (!invoice) return;
-    const file = new Blob([invoice], { type: 'application/pdf' });
-    const fileURL = URL.createObjectURL(file);
-    window.open(fileURL);
-  }, [invoice])
 
   return (
     <Layout background="white">

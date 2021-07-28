@@ -52,6 +52,7 @@ import AuthorizationWithToken from 'pages/auth';
 if (config.ENVIRONMENT === "production") {
   Sentry.init({
     dsn: config.SENTRY_DSN,
+    environment: config.ENVIRONMENT,
     integrations: [new Integrations.BrowserTracing()],
     tracesSampleRate: 1.0,
   });

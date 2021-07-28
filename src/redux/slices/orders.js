@@ -48,6 +48,12 @@ const orders = createSlice({
       }
     },
     fetchOrderFailure: (state, { payload }) => {},
+    setOrderStatus: (state, {payload}) => {
+      const index = state.items.findIndex(each => each.id.toString() === payload.id);
+      if (index !== -1) {
+        state.items[index].status = payload.status;
+      }
+    }
   },
 });
 
@@ -57,6 +63,7 @@ const {
   fetchOrderSuccess,
   fetchOrderFailure,
   fetchingOrder,
+  setOrderStatus
 } = orders.actions;
 
 export const fetchOrders = () => async (dispatch, getState) => {
@@ -72,7 +79,6 @@ export const fetchOrders = () => async (dispatch, getState) => {
       });
     });
   } catch (e) {
-    console.error(e);
     dispatch(fetchOrdersFailure(e));
   }
 };
@@ -84,7 +90,6 @@ export const fetchOrder = id => {
       dispatch(fetchOrderSuccess(resp.data));
       return resp.data;
     } catch (e) {
-      console.error(e);
       dispatch(fetchOrderFailure(e));
     }
   };
@@ -97,7 +102,6 @@ export const payOrder = (
   useCredit
 ) => {
   return async dispatch => {
- 
     try {
       dispatch(fetchingOrder());
       const request = await api.POST(`outlets/${outletId}/checkout`, {
@@ -110,7 +114,6 @@ export const payOrder = (
       dispatch(clearCart());
       return (redirect_uri) ? redirect_uri : `order/${sales_order.id}`;
     } catch (e) {
-      console.log(e);
       dispatch(clearCart());
        dispatch(
         catchError({
@@ -122,14 +125,12 @@ export const payOrder = (
        setTimeout(() => {
          window.location = '/orders'
        }, 3000);
-
     };
   };
 };
 
 export const makePayment = (salesId, paymentDetails) => {
   return async dispatch => {
-
     try {
       const resp = await api.POST(
         `sales_orders/${salesId}/payment`,
@@ -137,7 +138,6 @@ export const makePayment = (salesId, paymentDetails) => {
       );
       return resp.data.redirect_uri;
     } catch (e) {
-      console.error(e);
        dispatch(
         catchError({
           header: 'Orders',
@@ -148,8 +148,6 @@ export const makePayment = (salesId, paymentDetails) => {
        setTimeout(() => {
          window.location = '/orders'
        }, 3000);
-      
-
     };
   };
 };
@@ -183,6 +181,11 @@ export const getCompletedOrders = state =>
 export const getOrdersOutlets = (state) => {
   const outlets = state.orders.items.map(order => order.outlet_name).sort()
   return ['All', ...new Set(outlets)]
+}
+
+export const updateOrderStatus = (payload) => {
+  return async dispatch =>
+    dispatch(setOrderStatus(payload))
 }
 
 export const { setInitialOrders } = orders.actions;
