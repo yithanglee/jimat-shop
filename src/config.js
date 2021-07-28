@@ -1,5 +1,6 @@
 const JIMAT_API_ROOT = process.env.REACT_APP_JIMAT_API_ROOT || window.REACT_APP_JIMAT_API_ROOT;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || window.REACT_APP_GOOGLE_CLIENT_ID;
+const SENTRY_DSN = process.env.REACT_APP_SENTRY_DSN || window.REACT_APP_SENTRY_DSN;
 const ENVIRONMENT = process.env.NODE_ENV || window.NODE_ENV;
 const API_ROUTE = '/api';
 
@@ -25,6 +26,7 @@ const config = {
   JIMAT_API_ROOT,
   JIMAT_API: `${JIMAT_API_ROOT}${API_ROUTE}`,
   GOOGLE_CLIENT_ID,
+  SENTRY_DSN,
   ENVIRONMENT
 }
 

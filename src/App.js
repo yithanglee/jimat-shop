@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import { useMediaQuery } from 'react-responsive';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -15,6 +17,7 @@ import { fetchFavouriteOutlets } from 'redux/slices/outlets';
 import { fetchProfile } from 'redux/slices/auth';
 
 import Storage from 'utils/storage';
+import config from './config';
 
 import { Header } from 'components/header';
 import Sidebar from 'components/Sidebar';
@@ -44,6 +47,15 @@ import Cart from 'pages/cart';
 import TnC from 'pages/TnC';
 import HotItems from 'pages/hotItems';
 import AuthorizationWithToken from 'pages/auth';
+
+// Sentry
+if (config.ENVIRONMENT === "production") {
+  Sentry.init({
+    dsn: config.SENTRY_DSN,
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+  });
+}
 
 function App() {
   const handleMediaQueryChange = matches => {
