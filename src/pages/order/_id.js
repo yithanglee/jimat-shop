@@ -236,7 +236,7 @@ const Order = props => {
   }
 
   useEffect(() => {
-    if (params.get('billplz[paid]')) {
+    if (params && params.get('billplz[paid]') !== null) {
       return window.location.href = `/order/${id}`
     }
 

@@ -49,7 +49,7 @@ import HotItems from 'pages/hotItems';
 import AuthorizationWithToken from 'pages/auth';
 
 // Sentry
-if (config.ENVIRONMENT === "production") {
+if (config.ENVIRONMENT !== "dev") {
   Sentry.init({
     dsn: config.SENTRY_DSN,
     environment: config.ENVIRONMENT,

@@ -8,7 +8,15 @@ metadata:
     "helm.sh/hook": pre-install, pre-upgrade
 data:
   config.js: |
+{{- if eq "jx-production" .Release.Namespace }}
+    window.REACT_APP_JIMAT_API_ROOT={{ .Values.secrets.production.REACT_APP_JIMAT_API_ROOT }}
+    window.REACT_APP_GOOGLE_CLIENT_ID={{ .Values.secrets.production.REACT_APP_GOOGLE_CLIENT_ID }}
+    window.REACT_APP_RELEASE={{ .Values.secrets.production.REACT_APP_RELEASE }}
+    window.NODE_ENV=production
+{{- else}}
     window.REACT_APP_JIMAT_API_ROOT={{ .Values.secrets.staging.REACT_APP_JIMAT_API_ROOT }}
     window.REACT_APP_GOOGLE_CLIENT_ID={{ .Values.secrets.staging.REACT_APP_GOOGLE_CLIENT_ID }}
-    window.BUILD_ENV='{{ .Release.Namespace | replace "jx-" "" }}'
+    window.REACT_APP_RELEASE={{ .Values.secrets.staging.REACT_APP_RELEASE }}
+    window.NODE_ENV=staging
+{{- end}}
 
