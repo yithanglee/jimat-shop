@@ -46,6 +46,7 @@ import Home from 'pages/home';
 import Cart from 'pages/cart';
 import TnC from 'pages/TnC';
 import HotItems from 'pages/hotItems';
+import PromoItems from 'pages/promoItems';
 import AuthorizationWithToken from 'pages/auth';
 
 // Sentry
@@ -209,6 +210,7 @@ function App() {
                         />
                         <Route exact path={'/wishlist'} component={Wishlist} />
                         <Route exact path={'/hot-items'} component={HotItems} />
+                          <Route exact path={'/promo-items'} component={PromoItems} />
                         <Route exact path={'/auth/:token'} component={AuthorizationWithToken} />
                       </Switch>
                     </div>

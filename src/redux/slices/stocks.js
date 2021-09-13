@@ -26,9 +26,23 @@ const hotItems = createSlice({
   },
 });
 
+const promoItems = createSlice({
+  name: 'promoItems',
+  initialState: [],
+  reducers: {
+    fetchPromoItemsSuccess: (state, { payload }) => {
+      return [...payload];
+    },
+    fetchPromoItemsFailure: (state, { payload }) => {
+      return state;
+    },
+  },
+});
+
+
 const { fetchStocksSuccess, fetchStocksFailure } = byCategoryId.actions;
 const { fetchHotItemsSuccess, fetchHotItemsFailure } = hotItems.actions;
-
+const { fetchPromoItemsSuccess, fetchPromoItemsFailure } = promoItems.actions;
 export const fetchStocksBySupplier = (id, supplierId) => async dispatch => {
   try {
     const response = await api.GET(
@@ -64,11 +78,26 @@ export const fetchHotItems = () => async dispatch => {
     dispatch(fetchHotItemsFailure(e));
   }
 };
+export const fetchPromoItems = () => async dispatch => {
+  try {
+    const resp = await api.GET('search?tag=promo');
+    dispatch(fetchPromoItemsSuccess(resp.data.items));
+  } catch (e) {
+    dispatch(
+      catchError({
+        message: 'We cant show you anything now.',
+        header: '404! Something is wrong',
+      })
+    );
+    dispatch(fetchPromoItemsFailure(e));
+  }
+};
 
 export const getStocksBySupplier = (state, id) => state.stocks.byCategoryId[id];
 
 const stocks = combineReducers({
   byCategoryId: byCategoryId.reducer,
   hotItems: hotItems.reducer,
+  promoItems: promoItems.reducer,
 });
 export default stocks;

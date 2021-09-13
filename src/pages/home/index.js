@@ -6,6 +6,7 @@ import { fetchOutlets } from 'redux/slices/outlets';
 import { fetchBanners } from 'redux/slices/banners';
 import { fetchOrders, getPendingOrders } from 'redux/slices/orders';
 import { fetchHotItems } from 'redux/slices/stocks';
+import { fetchPromoItems } from 'redux/slices/stocks';
 
 import OutletListing from 'components/OutletListing';
 import AuthBanner from 'components/AuthBanner';
@@ -18,6 +19,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import NotificationBanner from './NotificationBanner';
 import Banner from './Banner';
 import ScrollableProduct from './ScrollableProduct';
+import ScrollablePromoProduct from './ScrollablePromoProduct';
 import ScrollableCategory from './ScrollableCategory';
 
 const Home = props => {
@@ -25,6 +27,7 @@ const Home = props => {
   const isDesktop = useMediaQuery({ query: '(min-width: 480px)' });
   const isSignIn = useSelector(state => state.auth.isUserLogin);
   const hotItems = useSelector(state => state.stocks.hotItems);
+  const promoItems = useSelector(state => state.stocks.promoItems);
   const banners = useSelector(state => {
     return state.banner.items;
   });
@@ -51,6 +54,7 @@ const Home = props => {
   useEffect(() => {
     dispatch(fetchBanners());
     dispatch(fetchHotItems());
+    dispatch(fetchPromoItems());
   }, [dispatch]);
 
   useEffect(() => {
@@ -84,6 +88,16 @@ const Home = props => {
       >
         <ScrollableProduct hotItems={hotItems.slice(0, 8)} />
       </Section>
+
+      <Section
+        isHidden={!promoItems.length}
+        header="Current Promo Items"
+        padding="vertical"
+        link={'/promo-items/'}
+      >
+        <ScrollablePromoProduct promoItems={promoItems.slice(0, 8)} />
+      </Section>
+
       <Section header="Category" padding="vertical">
         <ScrollableCategory {...props} />
       </Section>

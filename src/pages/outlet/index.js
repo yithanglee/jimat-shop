@@ -109,6 +109,7 @@ const Outlet = props => {
     if (selectedSupplier === '' && suppliers.length > 0) {
       if (searchResult !== '') {
         const supplier = suppliers.find(each => each.name === searchResult);
+      
         if (supplier) changeSupplier(supplier.id);
         dispatch(clearSearchTarget());
       } else {

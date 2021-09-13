@@ -108,7 +108,7 @@ const ProductListing = props => {
       {props.promotion && (
         <span className="promotion-badge">
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-blue-600 text-white">
-            {props.tag || 'Promo'}
+            {props.tag || (props.product.tag || 'Promo')}
           </span>
         </span>
       )}
