@@ -28,7 +28,7 @@ spec:
           name: next-version
           resources: {}
           script: |
-            #!/usr/bin/env bash
+            #!/usr/bin/env sh
             VERSION=$(jx-release-version)
             echo $VERSION > VERSION
         - image: ghcr.io/jenkins-x/jx-boot:3.2.215
