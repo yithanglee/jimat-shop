@@ -24,15 +24,14 @@ spec:
             mountPath: /tekton/home/npm
           workingDir: /workspace/source
         steps:
-        - image: gcr.io/jenkinsxio/jx-release-version:2.5.0
+        - image: ghcr.io/jenkins-x/jx-release-version:2.5.0
           name: next-version
           resources: {}
           script: |
             #!/usr/bin/env bash
             VERSION=$(jx-release-version)
             echo $VERSION > VERSION
-
-        - image: gcr.io/jenkinsxio/jx-boot:3.2.215
+        - image: ghcr.io/jenkins-x/jx-boot:3.2.215
           name: jx-variables
           resources: {}
           script: |
@@ -58,7 +57,7 @@ spec:
             source .jx/variables.sh
             cp /tekton/creds-secrets/tekton-container-registry-auth/.dockerconfigjson /kaniko/.docker/config.json
             /kaniko/executor $KANIKO_FLAGS --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION
-        - image: gcr.io/jenkinsxio/jx-changelog:0.0.47
+        - image: ghcr.io/jenkins-x/jx-changelog:0.0.47
           name: promote-changelog
           resources: {}
           script: |
@@ -76,13 +75,13 @@ spec:
             git push origin v$VERSION
 
             jx changelog create --version v${VERSION}
-        - image: gcr.io/jenkinsxio/jx-boot:3.2.215
+        - image: ghcr.io/jenkins-x/jx-boot:3.2.215
           name: promote-helm-release
           resources: {}
           script: |
             #!/usr/bin/env sh
             jx gitops helm release
-        - image: gcr.io/jenkinsxio/jx-promote:0.0.164
+        - image: ghcr.io/jenkins-x/jx-promote:0.0.164
           name: promote-jx-promote
           resources: {}
           script: |
