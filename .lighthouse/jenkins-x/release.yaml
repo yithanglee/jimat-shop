@@ -15,17 +15,14 @@ spec:
             value: /tekton/home/npm/.npmrc
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/javascript/release.yaml@versionStream
           name: ""
-          resources:
-            requests:
-              cpu: 200m
-              memory: 512Mi
+          resources: {}
           volumeMounts:
           - name: npmrc
             mountPath: /tekton/home/npm
           workingDir: /workspace/source
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
-          name: "git-clone-step"
+          name: ""
           resources: {}
         - image: ghcr.io/jenkins-x/jx-release-version:2.5.0
           name: next-version
@@ -36,7 +33,10 @@ spec:
             echo $VERSION > VERSION
         - image: ghcr.io/jenkins-x/jx-boot:3.2.215
           name: jx-variables
-          resources: {}
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 128Mi
           script: |
             #!/usr/bin/env sh
             jx gitops variables
