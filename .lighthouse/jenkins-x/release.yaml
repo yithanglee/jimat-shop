@@ -1,8 +1,6 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  annotations:
-    lighthouse.jenkins-x.io/prependStepsURL: https://raw.githubusercontent.com/jenkins-x/jx3-pipeline-catalog/60bed6408732c1eda91a15713f51a9f97dcb1757/tasks/git-clone/git-clone.yaml
   name: release
 spec:
   pipelineSpec:
@@ -15,16 +13,18 @@ spec:
           env:
           - name: NPM_CONFIG_USERCONFIG
             value: /tekton/home/npm/.npmrc
+          image: uses:jenkins-x/jx3-pipeline-catalog/tasks/javascript/release.yaml@versionStream
+          name: ""
           resources:
             requests:
-              cpu: 400m
+              cpu: 200m
               memory: 512Mi
           volumeMounts:
           - name: npmrc
             mountPath: /tekton/home/npm
           workingDir: /workspace/source
         steps:
-        - image: gcr.io/jenkinsxio/jx-release-version:1.0.42
+        - image: gcr.io/jenkinsxio/jx-release-version:2.5.0
           name: next-version
           resources: {}
           script: |
@@ -32,7 +32,7 @@ spec:
             VERSION=$(jx-release-version)
             echo $VERSION > VERSION
 
-        - image: gcr.io/jenkinsxio/jx-boot:3.1.110
+        - image: gcr.io/jenkinsxio/jx-boot:3.2.215
           name: jx-variables
           resources: {}
           script: |
@@ -58,7 +58,7 @@ spec:
             source .jx/variables.sh
             cp /tekton/creds-secrets/tekton-container-registry-auth/.dockerconfigjson /kaniko/.docker/config.json
             /kaniko/executor $KANIKO_FLAGS --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION
-        - image: gcr.io/jenkinsxio/jx-changelog:0.0.17
+        - image: gcr.io/jenkinsxio/jx-changelog:0.0.47
           name: promote-changelog
           resources: {}
           script: |
@@ -76,7 +76,7 @@ spec:
             git push origin v$VERSION
 
             jx changelog create --version v${VERSION}
-        - image: gcr.io/jenkinsxio/jx-boot:3.1.110
+        - image: gcr.io/jenkinsxio/jx-boot:3.2.215
           name: promote-helm-release
           resources: {}
           script: |
