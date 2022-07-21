@@ -25,7 +25,7 @@ const { fetchWishlistSuccess, fetchWishlistFailure } = wishlist.actions;
 
 export const fetchWishlist = () => async dispatch => {
   try {
-    const resp = await api.GET('user_profile/wishlist');
+    const resp = await api.GET('profile/wishlist');
     dispatch(fetchWishlistSuccess(resp.data.items));
   } catch (e) {
     console.error(e);

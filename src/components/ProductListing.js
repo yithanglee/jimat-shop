@@ -17,7 +17,7 @@ const WishlistStar = ({ active, id, accessToken }) => {
   // TODO: should put inside redux
   const toggleWishlist = id => {
     api
-      .POST(`user_profile/wishlist/${id}`)
+      .POST(`profile/wishlist/${id}`)
       .then(resp => {
         // should show notification that item is wishlisted
       })

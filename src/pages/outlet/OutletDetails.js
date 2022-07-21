@@ -13,7 +13,7 @@ const OutletDetails = props => {
 
   const toggleOutletFav = () => {
     api
-      .POST(`user_profile/favourite_outlets/${id}`)
+      .POST(`profile/favourite_outlets/${id}`)
       .then(resp => {
         toggleFavOutlet(!isFavourite);
       })

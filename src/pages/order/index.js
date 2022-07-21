@@ -146,7 +146,7 @@ const Order = () => {
   if (isSignIn) {
     return (
       <Layout>
-        <Section klass="pb-20">
+        <Section klass="pt-20 md:pt-4 pb-20">
           <Summary
             isLoading={isLoading}
             orders={{ allOrders, pickupOrders, pendingOrders }}

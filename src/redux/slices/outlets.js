@@ -54,7 +54,7 @@ export const fetchFavouriteOutlets = () => async dispatch => {
   try {
     // debugger;
     // if (!accessToken) throw Error('User not found');
-    const resp = await api.GET('user_profile/favourite_outlets');
+    const resp = await api.GET('profile/favourite_outlets');
     dispatch(fetchFavouriteOutletsSuccess(resp.data.items));
   } catch (e) {
     dispatch(fetchOutletsFailure(e));

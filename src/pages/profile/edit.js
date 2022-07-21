@@ -220,7 +220,7 @@ const ProfileEdit = props => {
 
   const onSubmit = data => {
     api
-      .PUT('user_profile', {
+      .PUT('profile', {
         user: {
           ...data,
         },

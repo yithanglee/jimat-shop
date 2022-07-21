@@ -122,13 +122,12 @@ export const login_with_token = params => {
 export const logout = () => async dispatch => {
   try {
     const resp = await api.DELETE('/authentication');
-
-    if (resp.data.success) {
+    if (resp.data.data === 'success') {
       Cookies.remove('accessToken');
       Cookies.remove('isSkipped');
       dispatch(
         catchNotification({
-          header: 'Logout Successfully',
+          header: resp.data.message,
           message: 'Bye Bye. We see you again.',
         })
       );
@@ -143,7 +142,7 @@ export const fetchProfile = () => {
   return async dispatch => {
     try {
       dispatch(fetchingProfile());
-      const resp = await api.GET('/user_profile');
+      const resp = await api.GET('/profile');
 
       dispatch(fetchProfileSuccess(resp.data.item));
       dispatch(

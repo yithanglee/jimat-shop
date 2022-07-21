@@ -44,7 +44,7 @@ const Transaction = ({ amount, date, name, type, sales_order }) => {
           <p className={`flex-shrink-0 text-sm leading-5 text-${color}-400 font-bold`}>
             {amount}
           </p>
-          {hasLink && <p className="text-xs text-blue-600">View Sales Order</p>}
+          {hasLink && <p className="text-xs text-blue-600 truncate">View Sales Order</p>}
         </div>
       </div>
     </NavLink>

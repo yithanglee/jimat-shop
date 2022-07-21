@@ -8,6 +8,7 @@ const fetch = async (method, url, data, options) => {
   try {
     let headers = {
       'Content-Type': 'application/json',
+      'Jimat-Origin': 'shop'
     }
 
     if (accessToken) {
