@@ -22,8 +22,8 @@ const CartSummary = ({ ready_to_pay, membership_verified, handleCreditToggle }) 
   });
 
   useEffect(() => {
-    dispatch(calculateCarts(is_credit_used));
-  }, [dispatch, carts, is_credit_used]);
+    dispatch(calculateCarts(is_credit_used, membership_verified));
+  }, [dispatch, carts, is_credit_used, membership_verified]);
 
   const handleCheckbox = e => {
     toggle_credit(e.target.checked);

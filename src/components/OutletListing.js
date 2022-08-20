@@ -38,33 +38,13 @@ const VoucherIcon = () => {
   );
 };
 
-const NavigationIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
-      width="25"
-      height="25"
-    >
-      <path
-        d="M507.607 4.395c-4.242-4.245-10.61-5.551-16.177-3.32l-482 192.798c-5.516 2.205-9.209 7.458-9.42 13.394-.211 5.936 3.101 11.438 8.444 14.029l190.067 92.182 92.182 190.068c2.514 5.184 7.764 8.454 13.493 8.454.178 0 .357-.003.536-.01 5.936-.211 11.188-3.904 13.394-9.419L510.928 20.573c2.228-5.571.922-11.935-3.321-16.178z"
-        fill="#e2e8f0"
-      />
-      <path
-        d="M507.607 4.395L198.522 313.477l92.182 190.068c2.514 5.184 7.764 8.454 13.493 8.454.178 0 .357-.003.536-.01 5.936-.211 11.188-3.904 13.394-9.419L510.928 20.573c2.228-5.571.922-11.935-3.321-16.178z"
-        fill="#cbd5e0"
-      />
-    </svg>
-  );
-};
-
 const OutletListing = ({ outlet, comingSoon }) => {
   const credit_enabled_outlet = useSelector(
     state => state.auth.user.credit_enabled_outlet
   );
   return (
     <div className={clsx(`bg-white outlet shadow-lg hover:shadow-md rounded-md`, comingSoon ? 'coming-soon' : '')}>
-      <div className="flex justify-between items-center ">
+      <div className="flex min-h-full h-full">
         <div className="p-3 flex-grow-1 flex-shrink-1 w-full">
           <OutletNavigator outlet={outlet} comingSoon={comingSoon}>
             {credit_enabled_outlet[outlet.id] && (
@@ -75,36 +55,34 @@ const OutletListing = ({ outlet, comingSoon }) => {
                 </span>
               </div>
             )}
-            <div className="content ">
+            <div className="content grid grid-rows-4 gap-0 h-full">
               <p className="text-md leading-5 font-bold text-black mb-1">
                 {outlet.name}
               </p>
-              <p className="text-sm leading-tight text-gray-400">
+              <p className="row-span-2 text-sm leading-6 text-gray-400">
                 {outlet.address}
               </p>
-              {comingSoon && (
-                <span className="mt-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-gray-300 text-white">
-                  Coming Soon
-                </span>
+              {comingSoon ? (
+                <div>
+                  <span className="mt-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium leading-5 bg-gray-300 text-white">
+                    Coming Soon
+                  </span>
+                </div>
+              ): (
+                <div className="flex-shrink-1 flex-grow-1">
+                  {outlet.status === 'active' && (
+                    <div className="block h-full">
+                      <span 
+                        className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium leading-5 bg-indigo-600 text-white">
+                        View Products
+                      </span>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           </OutletNavigator>
-        </div>
-        {!comingSoon && (
-          <div className="flex-shrink-1 flex-grow-1">
-            {outlet.map_url && (
-              <div className="p-4 block h-full">
-                <a
-                  href={outlet.map_url}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <NavigationIcon />
-                </a>
-              </div>
-            )}
-          </div>
-        )}
+        </div>       
       </div>
     </div>
   );

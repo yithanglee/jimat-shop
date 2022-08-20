@@ -63,6 +63,7 @@ const Outlet = props => {
   const [selectedSupplier, changeSupplier] = useState('');
   const [selectedItem, setSelectedItem] = useState({});
   const [isModalOpen, toggleModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [allCategories, setAllCategories] = useState([]);
 
@@ -123,11 +124,12 @@ const Outlet = props => {
       try {
         const response = await api.GET(`/outlets/${outletId}/categories`);
         setAllCategories(response.data.items);
+        setLoading(false)
       } catch (e) {
         console.error(e);
       }
     }
-
+    setLoading(true)
     fetchSuppliersByOutlet(id);
   }, [id]);
 
@@ -144,6 +146,7 @@ const Outlet = props => {
         let fullStockItems = response.data.items.filter(
           item => item.quantity_in_stock > 0
         );
+        setLoading(false)
         localDispatch({
           type: 'FETCH_STOCKS_SUCCESS',
           payload: {
@@ -160,6 +163,7 @@ const Outlet = props => {
     }
 
     if (selectedSupplier) {
+      setLoading(true)
       fetchStocksBySupplier();
     }
   }, [id, selectedSupplier, stocks.selectedCategory]);
@@ -236,7 +240,7 @@ const Outlet = props => {
       </Section>
       <Section padding>
         <StocksListing
-          isLoading={currentStocks.length === 0}
+          isLoading={loading}
           stocks={currentStocks}
           addItem={addItem}
           removeItem={removeItem}

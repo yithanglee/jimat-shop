@@ -15,6 +15,7 @@ const Category = props => {
   const dispatch = useDispatch();
   const { name } = useParams();
   const [items, updateItems] = useState([]);
+  const [loading, setLoading] = useState([true]);
   const [selectedCategory, changeCategory] = useState(name);
   const handleItemClick = barcode => {
     dispatch(fetchSearchTarget(barcode));
@@ -30,6 +31,9 @@ const Category = props => {
       })
       .then(resp => {
         updateItems(resp.data.items);
+        setLoading(false);
+        debugger
+        console.log(loading)
       })
       .catch(function(error) {
         console.error(error);
@@ -65,10 +69,13 @@ const Category = props => {
         </Scrollable>
       </SubHeader>
       <Section>
-        {items.length === 0 && (
+        {loading && (
           <ContentLoader height="180" background="white" />
         )}
-        <div className="row">
+        {items.length === 0 ? (
+          <div>No products available under this category and brand.</div>
+        ) : 
+        (<div className="row">
           {items.map(item => (
             <div
               className="col"
@@ -82,7 +89,7 @@ const Category = props => {
               />
             </div>
           ))}
-        </div>
+        </div>)}
       </Section>
     </Layout>
   );

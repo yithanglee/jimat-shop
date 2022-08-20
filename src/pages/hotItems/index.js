@@ -27,8 +27,8 @@ const HotItem = () => {
         <p className="header-description">Limited Time. Buy while it lasts.</p>
       </SubHeader>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-3 p-2 lg:p-5">
-        {hotItems.map(item => (
-          <div onClick={() => handleItemClick(item.item)}>
+        {hotItems.map((item, idx) => (
+          <div onClick={() => handleItemClick(item.item)} key={idx++}>
             <ProductListing promotion noFooter product={item.item} />
           </div>
         ))}

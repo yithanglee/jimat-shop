@@ -152,7 +152,7 @@ export const clearCart = () => dispatch => {
     });
 };
 
-export const calculateCarts = is_credit_used => async (dispatch, getState) => {
+export const calculateCarts = (is_credit_used, membership) => async (dispatch, getState) => {
   try {
     const state = getState();
     const outletId = state.carts.cartOutlet;
@@ -166,7 +166,9 @@ export const calculateCarts = is_credit_used => async (dispatch, getState) => {
         line_items: carts,
         is_credit_used: is_credit_used,
       };
-      const resp = await api.PUT(`/outlets/${outletId}/calculate`, body);
+      const resp = (membership) 
+        ? await api.PUT(`/outlets/${outletId}/calculate`, body)
+        : await api.POST(`/outlets/${outletId}/calculate`, body)
       dispatch(calculateCartsSuccess(resp.data.data));
     } else {
       dispatch(clearSummary());
