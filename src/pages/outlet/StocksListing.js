@@ -13,9 +13,9 @@ const StocksListing = ({ stocks, addItem, removeItem, outletId, isLoading }) => 
       No products available under this category and brand.
     </div>)
     : (<div className="outlet-item-row">
-      {stocks.map(item => {
+      {stocks.map((item, idx) => {
         return (
-          <div className="outlet-item-col" key={item.barcode}>
+          <div className="outlet-item-col" key={item.barcode + idx}>
             <ProductListing
               vertical
               product={item}

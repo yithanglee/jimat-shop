@@ -63,7 +63,7 @@ const ProductFooter = props => {
   if (props.product.quantity_in_stock === 0) {
     return (
       <div className="product-quantity">
-        <p className="text-md leading-5 text-red-500">Out of Stock</p>
+        <p className="text-xs font-bold leading-7 text-red-500 uppercase">Out of Stock</p>
       </div>
     );
   }
@@ -102,8 +102,8 @@ const ProductListing = props => {
 
   return (
     <div
-      className={`rounded-lg shadow-lg hover:shadow-md overflow-hidden mb-8 product ${type} ${hideFooter ||
-        'padding-bottom'}`}
+      className={`rounded-lg shadow-lg hover:shadow-md overflow-hidden grid grid-rows-2 gap-0 product ${type} ${hideFooter ||
+        'padding'}`}
     >
       {props.promotion && (
         <span className="promotion-badge">
@@ -131,10 +131,10 @@ const ProductListing = props => {
         </span>
       )}
 
-      <div className="product-img large mx-auto text-center ">
+      <div className="product-img large mx-auto text-center row-span-2">
         <img alt={product.name} src={product.image_url} className="mx-auto" />
       </div>
-      <div className="product-details">
+      <div className={`product-details grid gap-0 ${hideFooter ? 'grid-rows-2' : 'grid-rows-3'}`}>
         {/* Note:
           this is hide for now, because it doesn't provide any meaning
           this was implemented to show whether the item is under BA-100
@@ -144,7 +144,7 @@ const ProductListing = props => {
             Product JiMAT
           </div>
         )}
-        <div className="product-info">
+        <div className="product-info row-span-2">
           <div className="product-name">
             <p className="text-sm md:text-md text-gray-800 mb-2">
               {product.name}
@@ -176,8 +176,9 @@ const ProductListing = props => {
             </div>
           )}
         </div>
-        <div className="product-footer">
-          {!hideFooter && (
+        
+        {!hideFooter && (
+          <div className="product-footer">
             <ProductFooter
               error={error}
               readonly={props.readonly}
@@ -186,8 +187,8 @@ const ProductListing = props => {
               addToCart={addToCart}
               removeFromCart={removeFromCart}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

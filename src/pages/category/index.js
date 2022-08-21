@@ -32,13 +32,12 @@ const Category = props => {
       .then(resp => {
         updateItems(resp.data.items);
         setLoading(false);
-        debugger
         console.log(loading)
       })
       .catch(function(error) {
         console.error(error);
       });
-  }, [selectedCategory]);
+  }, [selectedCategory, loading]);
   return (
     <Layout>
       <SubHeader>
