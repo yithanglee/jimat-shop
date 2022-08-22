@@ -9,7 +9,7 @@ const StocksListing = ({ stocks, addItem, removeItem, outletId, isLoading }) => 
   const wishlistedItems = useSelector(state => state.wishlist.ids);
 
   return !isLoading && stocks.length === 0 
-    ? (<div className="min-h-full flex items-center justify-center">
+    ? (<div className="min-h-full flex items-center justify-center p-20 text-gray-300 text-center">
       No products available under this category and brand.
     </div>)
     : (<div className="outlet-item-row">

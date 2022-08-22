@@ -25,13 +25,26 @@ const SelectOutlet = () => {
   return (
     <Layout>
       <SubHeader withCart>
-        <p className="header-title">
-          Shop in&nbsp;
-          <span className="change-location">{selectedLocation}</span>
-        </p>
-        <p className="header-description">
-          {outlets.length} Shops open in this area
-        </p>
+        {(parsed['item']) 
+          ? <div>
+            <p className="header-title">
+              {outlets.length > 0 && outlets[0].stock?.item.name}
+            </p>
+            <p className="header-description">
+              {outlets.length} shops available for this item.
+            </p>
+          </div>
+          : <div>
+            <p className="header-title">
+              Shop in&nbsp;
+              <span className="change-location">{selectedLocation}</span>
+            </p>
+            <p className="header-description">
+              {outlets.length} Shops open in this area
+            </p>
+          </div>
+        }
+       
       </SubHeader>
       <Section padding="vertical">
         <div className="outlet-list px-3">
@@ -39,6 +52,7 @@ const SelectOutlet = () => {
             <OutletListing
               key={index}
               outlet={item}
+              scope={parsed['item'] ? 'details' : 'general'}
               comingSoon={item.status === 'coming_soon'}
             />
           ))}

@@ -32,7 +32,6 @@ const Category = props => {
       .then(resp => {
         updateItems(resp.data.items);
         setLoading(false);
-        console.log(loading)
       })
       .catch(function(error) {
         console.error(error);
@@ -71,8 +70,8 @@ const Category = props => {
         {loading && (
           <ContentLoader height="180" background="white" />
         )}
-        {items.length === 0 ? (
-          <div>No products available under this category and brand.</div>
+        {!loading && items.length === 0 ? (
+          <div class="flex items-center justify center p-20 text-center">No products available under this category and brand.</div>
         ) : 
         (<div className="row">
           {items.map(item => (

@@ -8,10 +8,11 @@ const OutletNavigator = props => {
   if (props.comingSoon) {
     return props.children;
   } else {
+    const path = (props.scope && props.scope === 'details')
+      ? `/outlet/${props.outlet.id}?category=${props.outlet.stock?.item.category_id}&supplier=${props.outlet.stock?.item.supplier.id}&name=${props.outlet.name}&map_url=${props.outlet.map_url}`
+      : `/outlet/${props.outlet.id}?name=${props.outlet.name}&map_url=${props.outlet.map_url}`
     return (
-      <NavLink
-        to={`/outlet/${props.outlet.id}?name=${props.outlet.name}&address=${props.outlet.address}&map_url=${props.outlet.map_url}`}
-      >
+      <NavLink to={path}>
         {props.children}
       </NavLink>
     );
@@ -38,7 +39,7 @@ const VoucherIcon = () => {
   );
 };
 
-const OutletListing = ({ outlet, comingSoon }) => {
+const OutletListing = ({ outlet, comingSoon, scope }) => {
   const credit_enabled_outlet = useSelector(
     state => state.auth.user.credit_enabled_outlet
   );
@@ -46,7 +47,7 @@ const OutletListing = ({ outlet, comingSoon }) => {
     <div className={clsx(`bg-white outlet shadow-lg hover:shadow-md rounded-md`, comingSoon ? 'coming-soon' : '')}>
       <div className="flex min-h-full h-full">
         <div className="p-3 flex-grow-1 flex-shrink-1 w-full">
-          <OutletNavigator outlet={outlet} comingSoon={comingSoon}>
+          <OutletNavigator outlet={outlet} comingSoon={comingSoon} scope={scope}>
             {credit_enabled_outlet[outlet.id] && (
               <div>
                 <VoucherIcon />
@@ -55,7 +56,7 @@ const OutletListing = ({ outlet, comingSoon }) => {
                 </span>
               </div>
             )}
-            <div className="content grid grid-rows-4 gap-0 h-full">
+            <div className="content grid grid-rows-4 gap-2 h-full">
               <p className="text-md leading-5 font-bold text-black mb-1">
                 {outlet.name}
               </p>

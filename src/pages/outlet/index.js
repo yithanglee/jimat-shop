@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
 import SubHeader from 'components/header';
@@ -44,13 +44,16 @@ function reducer(state, action) {
 }
 
 const Outlet = props => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const location = useLocation();
+  const parsed = queryString.parse(location.search);
+
   const initialState = {
     selectedCategory: '',
     bySupplierId: {},
   };
   const [stocks, localDispatch] = useReducer(reducer, initialState);
-  const dispatch = useDispatch();
-  const { id } = useParams();
 
   const searchResult = useSelector(state =>
     !!state.search ? state.search.supplier.name : ''
@@ -96,6 +99,15 @@ const Outlet = props => {
   const params = queryString.parse(props.location.search);
 
   useEffect(() => {
+    if (parsed['category'] && !categories.length) {
+      localDispatch({
+        type: 'CHANGE_CATEGORY',
+        payload: {
+          selectedCategory: parseInt(parsed['category']),
+        },
+      });
+    }
+
     if (stocks.selectedCategory === '' && categories.length > 0) {
       localDispatch({
         type: 'CHANGE_CATEGORY',
@@ -107,6 +119,10 @@ const Outlet = props => {
   }, [stocks.selectedCategory, categories]);
 
   useEffect(() => {
+    if (parsed['supplier'] && !categories.length) {
+      changeSupplier(parsed['supplier'])
+    }
+
     if (selectedSupplier === '' && suppliers.length > 0) {
       if (searchResult !== '') {
         const supplier = suppliers.find(each => each.name === searchResult);
@@ -120,45 +136,55 @@ const Outlet = props => {
   }, [dispatch, searchResult, selectedSupplier, suppliers]);
 
   useEffect(() => {
-    async function fetchSuppliersByOutlet(outletId) {
+    let apiSubscription = true
+    const fetchSuppliersByOutlet = async function (outletId) {
       try {
         const response = await api.GET(`/outlets/${outletId}/categories`);
-        setAllCategories(response.data.items);
-        setLoading(false)
+        if (apiSubscription) {
+          setAllCategories(response.data.items)
+          setLoading(false)
+        }
       } catch (e) {
         console.error(e);
       }
     }
     setLoading(true)
     fetchSuppliersByOutlet(id);
+
+    return () => apiSubscription = false
   }, [id]);
 
   useEffect(() => {
+    let apiSubscription = true;
     async function fetchStocksBySupplier() {
-      try {
-        const response = await api.GET(
-          `/outlets/${id}/category/${stocks.selectedCategory}/suppliers/${selectedSupplier}/stocks`
-        );
-        let emptyStockItems = response.data.items.filter(
-          item => item.quantity_in_stock === 0
-        );
+      if (apiSubscription) {
+        try {
+          const response = await api.GET(
+            `/outlets/${id}/category/${stocks.selectedCategory}/suppliers/${selectedSupplier}/stocks`
+          );
+          let emptyStockItems = response.data.items.filter(
+            item => item.quantity_in_stock === 0
+          );
 
-        let fullStockItems = response.data.items.filter(
-          item => item.quantity_in_stock > 0
-        );
-        setLoading(false)
-        localDispatch({
-          type: 'FETCH_STOCKS_SUCCESS',
-          payload: {
-            id: selectedSupplier,
-            stocks: [...fullStockItems, ...emptyStockItems],
-          },
-        });
-      } catch (e) {
-        localDispatch({
-          type: 'FETCH_STOCKS_FAILURE',
-          payload: e,
-        });
+          let fullStockItems = response.data.items.filter(
+            item => item.quantity_in_stock > 0
+          );
+          
+          localDispatch({
+            type: 'FETCH_STOCKS_SUCCESS',
+            payload: {
+              id: selectedSupplier,
+              stocks: [...fullStockItems, ...emptyStockItems],
+            },
+          });
+
+          setLoading(false)
+        } catch (e) {
+          localDispatch({
+            type: 'FETCH_STOCKS_FAILURE',
+            payload: e,
+          });
+        }
       }
     }
 
@@ -166,6 +192,8 @@ const Outlet = props => {
       setLoading(true)
       fetchStocksBySupplier();
     }
+
+    return () => apiSubscription = false
   }, [id, selectedSupplier, stocks.selectedCategory]);
 
   const addItem = item => {
