@@ -116,7 +116,7 @@ const Outlet = props => {
         },
       });
     }
-  }, [stocks.selectedCategory, categories]);
+  }, [stocks.selectedCategory, categories, parsed]);
 
   useEffect(() => {
     if (parsed['supplier'] && !categories.length) {
@@ -133,7 +133,7 @@ const Outlet = props => {
         changeSupplier(suppliers[0].id);
       }
     }
-  }, [dispatch, searchResult, selectedSupplier, suppliers]);
+  }, [dispatch, searchResult, selectedSupplier, suppliers, categories, parsed]);
 
   useEffect(() => {
     let apiSubscription = true

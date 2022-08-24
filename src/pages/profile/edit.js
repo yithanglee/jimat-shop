@@ -211,7 +211,7 @@ const AddressForm = props => {
 
 const ProfileEdit = props => {
   const dispatch = useDispatch();
-  const { register, errors, handleSubmit } = useForm({
+  const { register, errors, setError, handleSubmit } = useForm({
     criteriaMode: "all"
   });
   const user = useSelector(state => {
@@ -235,7 +235,8 @@ const ProfileEdit = props => {
         );
       })
       .catch(function (error) {
-        console.error(error);
+        const errs = fields.find(e => e.store_name === Object.keys(error.response.data.errors))
+        setError(errs.store_name, { type: "focus" }, { shouldFocus: true })
       });
   };
 
@@ -267,7 +268,7 @@ const ProfileEdit = props => {
                     />
                   </div>
                   {field === input.store_name && errors[field] &&
-                    <div className="py-2 text-red-500 text-xs">{errors[field]["message"]}</div>
+                    <div className="py-2 text-red-500 text-xs">Input not valid!</div>
                   }
                 </div>
               );
