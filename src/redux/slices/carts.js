@@ -166,7 +166,7 @@ export const calculateCarts = (is_credit_used, membership) => async (dispatch, g
         line_items: carts,
         is_credit_used: is_credit_used,
       };
-      const resp = (membership) 
+      const resp = (membership && outletId) 
         ? await api.PUT(`/outlets/${outletId}/calculate`, body)
         : await api.POST(`/outlets/${outletId}/calculate`, body)
       dispatch(calculateCartsSuccess(resp.data.data));
