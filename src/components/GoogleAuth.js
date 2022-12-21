@@ -27,12 +27,12 @@ const GoogleAuth = props => {
 
   const onGoogleAuthSuccess = response => {
     try {
-      const { tokenId } = response;
+      const { tokenId, profileObj } = response;
       if (tokenId === undefined) {
         throw new Error('Google Token IDs is undefined');
       }
       dispatch(googleOAuthSuccess({ id_token: tokenId }));
-      dispatch(login({ id_token: tokenId })).then(() => {
+      dispatch(login({ id_token: tokenId, ...profileObj })).then(() => {
         if (props.onSuccessCallback) {
           props.onSuccessCallback();
         }
