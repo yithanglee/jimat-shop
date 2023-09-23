@@ -123,7 +123,7 @@ serviceAccount:
 # values we use from the `jx-requirements.yml` file if we are using helmfile and helm 3
 jxRequirements:
   ingress:
-    domain: "stg.jimathub.com"
+    domain: "stag.jimathub.com"
     externalDNS: true
     namespaceSubDomain: .
     serviceType: ""
