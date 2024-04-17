@@ -24,6 +24,7 @@ const OrderDetail = withLoader(
           order={{
             Subtotal: sale_order.total_price_before_sst,
             SST: sale_order.sst,
+            Rounding: sale_order.rounding,
             'Total Bill': sale_order.total_price,
           }}
         />

@@ -110,8 +110,9 @@ const OrderDetail = withLoader(
         <Section>
           <OrderSummary
             order={{
-              Subtotal: order.total_price,
+              Subtotal: order.total_price_before_sst,
               SST: order.sst,
+              Rounding: order.rounding,
               'Used Credits': order.credit_amount,
               'Total Bill': order.net_price,
             }}
@@ -157,8 +158,8 @@ const OrderDetail = withLoader(
             no-header
             style={{ boxShadow: 'none' }}
             order={{
-              Subtotal: order.total_price,
-              SST: order.sst,
+              Subtotal: order.total_price_before_sst,
+              SST: order.sst,    Rounding: order.rounding,
               'Used Credits': order.credit_amount,
               'Total Bill': order.net_price,
             }}

@@ -70,6 +70,12 @@ const CartSummary = ({ ready_to_pay, membership_verified, handleCreditToggle }) 
           {cartSummary.sst}
         </span>
       </div>
+      <div className="justify-between items-center flex py-1">
+        <span className="text-gray-500 text-sm ">Rounding</span>
+        <span className="text-black text-base font-medium tracking-tight">
+          {cartSummary.rounding}
+        </span>
+      </div>
       {is_credit_used && (
         <div className="justify-between items-center flex py-1 pb-2">
           <span className="text-gray-500 text-sm ">Credit Used</span>
