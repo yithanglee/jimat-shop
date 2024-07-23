@@ -17,6 +17,7 @@
     "fast-deep-equal": "^3.1.1",
     "framer-motion": "^1.10.3",
     "html-pdf": "^2.2.0",
+    "http-server": "^14.1.1",
     "js-cookie": "^3.0.1",
     "localforage": "^1.7.3",
     "lodash.isempty": "^4.4.0",
