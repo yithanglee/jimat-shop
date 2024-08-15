@@ -43,7 +43,7 @@
     "tailwindcss": "^1.2.0"
   },
   "scripts": {
-    "web-server": "http-server -p 8332 httpdocs &",
+    "web-server": "http-server -p 8332 ./build &",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --passWithNoTests",
